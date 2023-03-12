@@ -23,13 +23,12 @@ class Router
 	public function match($request) {
 		$method = $request['REQUEST_METHOD'];
 		$path = str_replace($this->prefix, '', $_SERVER['REQUEST_URI']);
-		$path = trim(parse_url($path, PHP_URL_PATH), '/');
 		$path = $path ?: '/';
 		
 		$segments = explode('/', $path);
 		
 		foreach ($this->routes as $route) {
-			$route_segments = explode('/', trim($route['path'], '/'));
+			$route_segments = explode('/', $route['path']);
 			$num_segments = count($route_segments);
 			if ($num_segments == count($segments) && $route['method'] == $method) {
 				$params = array();

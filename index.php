@@ -16,6 +16,7 @@ $router->setBasePath('/Forbidden-PHP-Router');
 
 // Routes
 
+$router->add('GET', '/', 'TestController', 'index');
 $router->add('GET', '/test/{id}', 'TestController', 'test');
 
 $response = $router->match($_SERVER);
