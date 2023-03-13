@@ -1,22 +1,19 @@
 <?php 
 
-class Autoloader
+function register()
 {
-    public static function register()
-    {
-        spl_autoload_register(function($class)
-		{
-			$filename = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
+	spl_autoload_register(function($class)
+	{
+		$filename = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
 
-            $file = __DIR__ . DIRECTORY_SEPARATOR . $filename;
+		$file = __DIR__ . DIRECTORY_SEPARATOR . $filename;
 
-            if (!file_exists($file)) {
-				return false;
-			}
+		if (!file_exists($file)) {
+			return false;
+		}
 
-			require_once $file;
-		});
-    }
+		require_once $file;
+	});
 }
 
-Autoloader::register();
+register();
