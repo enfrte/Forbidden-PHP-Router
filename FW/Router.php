@@ -7,6 +7,12 @@ class Router
 	private $routes = [];
 	private $prefix = "";
 
+	/**
+	 * Add the folder path if not serving from the domain root.
+	 *
+	 * @param string $path
+	 * @return void
+	 */
 	public function setBasePath($path) {
 		$this->prefix = $path;
 	}
@@ -22,7 +28,7 @@ class Router
 
 	public function match($request) {
 		$method = $request['REQUEST_METHOD'];
-		$path = str_replace($this->prefix, '', $_SERVER['REQUEST_URI']);
+		$path = str_replace($this->prefix, '', $request['REQUEST_URI']);
 		$path = $path ?: '/';
 		
 		$segments = explode('/', $path);
